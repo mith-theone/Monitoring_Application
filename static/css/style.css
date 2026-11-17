@@ -1,0 +1,142 @@
+:root {
+  --bg: #f0f3f7;
+  --surface: #ffffff;
+  --border: #d5dde8;
+  --text: #1a2332;
+  --muted: #5c6b7f;
+  --accent: #1f6feb;
+  --empty: #e8eef6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(160deg, #e8eef6 0%, #f5f7fa 45%, #eef2f7 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1.5rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.app-header .subtitle {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.metric-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-panel h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--empty);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.footer-note {
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logout-form {
+  margin: 0;
+}
+
+.login-panel {
+  max-width: 380px;
+  margin: 2rem auto 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.35rem;
+}
+
+.login-heading {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.login-hint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.flash-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.flash {
+  padding: 0.55rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.flash-error {
+  background: #fde8e8;
+  color: #8a1f1f;
+  border: 1px solid #f5c2c2;
+}
+
+.login-form .btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+}
