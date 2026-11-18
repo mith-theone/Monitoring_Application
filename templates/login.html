@@ -5,17 +5,7 @@
 {% block content %}
 <section class="login-panel" aria-label="Sign in">
   <h2 class="login-heading">Sign in</h2>
-  <p class="login-hint">Demo admin access — metrics UI is read-only after login.</p>
-
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      <ul class="flash-list" role="alert">
-        {% for category, message in messages %}
-          <li class="flash flash-{{ category }}">{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+  <p class="login-hint">Demo Monitoring (jumpuser3) — metrics UI is read-only after login. See README for demo credentials.</p>
 
   <form method="post" action="{{ url_for('login') }}" class="login-form" autocomplete="off">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

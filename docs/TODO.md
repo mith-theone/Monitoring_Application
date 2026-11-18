@@ -69,19 +69,19 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 3 — Add / list / remove servers (UI + API)
 
-- [ ] **3.1** Server list page (read-only table) behind login
+- [x] **3.1** Server list page (read-only table) behind login
   - Security: require authenticated session
   - Docs: short “Servers” section in README
-- [ ] **3.2** Add-server form (name, hostname/IP, SSH user, key path or password, port default 22)
+- [x] **3.2** Add-server form (name, hostname/IP, SSH user, key path or password, port default 22)
   - Security: validate host/port input; cap at ~10 servers; sanitize display name; never echo SSH password back in HTML
   - Docs: field meanings and SSH key path example
-- [ ] **3.3** Persist new server to SQLite; show success/error flash
+- [x] **3.3** Persist new server to SQLite; show success/error flash
   - Security: CSRF on form; authorize admin session only
   - Docs: update TODO checkboxes / README “add a host” step
-- [ ] **3.4** Remove-server action (POST) with confirm in UI
+- [x] **3.4** Remove-server action (POST) with confirm in UI
   - Security: POST + CSRF; no GET delete; confirm dialog
   - Docs: note that remove only deletes local config, not the remote host
-- [ ] **3.5** Unit tests for add/list/remove and authz on those routes
+- [x] **3.5** Unit tests for add/list/remove and authz on those routes
   - Security: unauthenticated add/remove must fail; over-limit add rejected
   - Docs: test commands still work
 
@@ -89,16 +89,16 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 4 — Localhost metrics (no SSH yet)
 
-- [ ] **4.1** Implement local collectors for CPU and memory (e.g. `psutil`) for localhost demo
+- [x] **4.1** Implement local collectors for CPU and memory (e.g. `psutil`) for localhost demo
   - Security: read-only APIs; no shell=`True` with user input
   - Docs: explain localhost works without SSH for quick demo
-- [ ] **4.2** Implement local network I/O and listening ports collectors
+- [x] **4.2** Implement local network I/O and listening ports collectors
   - Security: display-only; no bind/listen changes
   - Docs: list metrics shown on dashboard
-- [ ] **4.3** Wire collectors into dashboard for a “localhost” target
+- [x] **4.3** Wire collectors into dashboard for a “localhost” target
   - Security: still read-only UI
   - Docs: how to open dashboard and see localhost stats
-- [ ] **4.4** Unit tests with mocked collector outputs
+- [x] **4.4** Unit tests with mocked collector outputs
   - Security: tests must not need real privileged access
   - Docs: note mocks in test docs/README
 
@@ -106,19 +106,19 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 5 — SSH metrics collection (remote Linux)
 
-- [ ] **5.1** Add SSH client helper (e.g. Paramiko) with connect timeout
+- [x] **5.1** Add SSH client helper (e.g. Paramiko) with connect timeout
   - Security: host key policy documented (demo: known_hosts or explicit warning); never log private keys/passwords; timeouts to avoid hangs
   - Docs: SSH prerequisites (key-based preferred)
-- [ ] **5.2** Remote commands/parsers for CPU + memory over SSH
+- [x] **5.2** Remote commands/parsers for CPU + memory over SSH
   - Security: fixed command allowlist only; no user-supplied shell strings
   - Docs: which remote commands are used
-- [ ] **5.3** Remote network + listening ports over SSH
+- [x] **5.3** Remote network + listening ports over SSH
   - Security: same allowlist; handle permission errors gracefully
   - Docs: expected remote tools (`ss`/`ps` etc.) if any
-- [ ] **5.4** Per-server metrics endpoint or server detail page using SSH collectors
+- [x] **5.4** Per-server metrics endpoint or server detail page using SSH collectors
   - Security: auth required; do not expose raw SSH errors with secrets
   - Docs: how to add a remote host and view it
-- [ ] **5.5** Unit tests with mocked SSH client (success + unreachable)
+- [x] **5.5** Unit tests with mocked SSH client (success + unreachable)
   - Security: ensure credentials not asserted in plaintext in test output beyond fixtures
   - Docs: no live SSH required for CI
 
@@ -126,16 +126,16 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 6 — Dashboard UX (refresh + charts + errors)
 
-- [ ] **6.1** Auto-refresh metrics every 5 seconds (JS poll) + manual refresh button
+- [x] **6.1** Auto-refresh metrics every 5 seconds (JS poll) + manual refresh button
   - Security: poll only authenticated JSON/HTML endpoints; no credentials in query strings
   - Docs: refresh behavior in README
-- [ ] **6.2** Add simple Chart.js (or similar) for CPU/memory
+- [x] **6.2** Add simple Chart.js (or similar) for CPU/memory
   - Security: load scripts from pinned CDN or local static files
   - Docs: UI overview update
-- [ ] **6.3** Empty / unreachable host error states in UI
+- [x] **6.3** Empty / unreachable host error states in UI
   - Security: generic errors to user; details in server logs without secrets
   - Docs: troubleshooting “host unreachable”
-- [ ] **6.4** Light smoke/UI tests or route tests for dashboard JSON/HTML
+- [x] **6.4** Light smoke/UI tests or route tests for dashboard JSON/HTML
   - Security: ensure metrics routes require login
   - Docs: how to verify refresh locally
 
@@ -143,13 +143,13 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 7 — Hardening + docs polish (demo)
 
-- [ ] **7.1** Review: session cookie flags, CSRF, `0.0.0.0` bind, debug off by default
+- [x] **7.1** Review: session cookie flags, CSRF, `0.0.0.0` bind, debug off by default
   - Security: checklist pass against PRD security notes
   - Docs: “Security notes (demo)” section in README
-- [ ] **7.2** Ensure `.env.example` exists (no real secrets) and README run steps are minimal (venv → install → run)
+- [x] **7.2** Ensure `.env.example` exists (no real secrets) and README run steps are minimal (venv → install → run)
   - Security: `.env` gitignored
   - Docs: final copy-paste local run instructions
-- [ ] **7.3** Confirm metrics UI has no mutating remote actions
+- [x] **7.3** Confirm metrics UI has no mutating remote actions
   - Security: read-only guarantee
   - Docs: mark PRD success criteria mapped in README
 
@@ -157,16 +157,16 @@ Reference: [requirements.md](./requirements.md)
 
 ## Increment 8 — CI/CD (GitHub Actions)
 
-- [ ] **8.1** Add `.github/workflows/ci.yml` — lint/format check (e.g. `ruff` or `flake8`) on PR/push
+- [x] **8.1** Add `.github/workflows/ci.yml` — lint/format check (e.g. `ruff` or `flake8`) on PR/push
   - Security: Actions pinned to known versions (`actions/checkout`, `actions/setup-python`); least privileges (`permissions: contents: read`)
   - Docs: mention CI badge or “CI runs on push/PR” in README
-- [ ] **8.2** CI job: install deps + run `pytest`
+- [x] **8.2** CI job: install deps + run `pytest`
   - Security: no SSH secrets in CI; tests use mocks only
   - Docs: how to read CI failures
-- [ ] **8.3** Optional CI job: basic import/app factory smoke test
+- [x] **8.3** Optional CI job: basic import/app factory smoke test
   - Security: do not start a publicly bound server in CI
   - Docs: note what CI does *not* deploy (local demo only)
-- [ ] **8.4** Document that deployment is local-only (no CD deploy to cloud for this demo)
+- [x] **8.4** Document that deployment is local-only (no CD deploy to cloud for this demo)
   - Security: avoid publishing demo credentials in workflow logs
   - Docs: “CI vs local run” short section
 

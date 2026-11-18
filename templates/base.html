@@ -19,15 +19,28 @@
         <p class="subtitle">Read-only Linux server health (local demo)</p>
       </div>
       {% if is_authenticated() %}
-      <form method="post" action="{{ url_for('logout') }}" class="logout-form">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-sm btn-outline-secondary">Sign out</button>
-      </form>
+      <nav class="header-nav" aria-label="Primary">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('servers_list') }}">Servers</a>
+        <form method="post" action="{{ url_for('logout') }}" class="logout-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-sm btn-outline-secondary">Sign out</button>
+        </form>
+      </nav>
       {% endif %}
     </div>
   </header>
 
   <main class="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flash-list" role="status">
+          {% for category, message in messages %}
+            <li class="flash flash-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
   </main>
 

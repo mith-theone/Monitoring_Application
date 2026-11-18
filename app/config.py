@@ -5,7 +5,6 @@ from __future__ import annotations
 import os
 import secrets
 
-
 # Demo-only defaults — change via env for anything beyond local demo.
 DEFAULT_ADMIN_USERNAME = "admin"
 DEFAULT_ADMIN_PASSWORD = "admin123"

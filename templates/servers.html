@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Servers{% endblock %}
+
+{% block content %}
+<section aria-label="Monitored servers">
+  <div class="section-head">
+    <h2>Servers</h2>
+    <a class="btn btn-sm btn-primary" href="{{ url_for('servers_add') }}">Add server</a>
+  </div>
+  <p class="section-hint">
+    Up to {{ max_servers }} hosts. Removing a row only deletes local config — the remote host is not changed.
+  </p>
+
+  {% if servers %}
+  <div class="table-wrap">
+    <table class="table table-sm align-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Host</th>
+          <th>SSH user</th>
+          <th>Port</th>
+          <th>Auth</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in servers %}
+        <tr>
+          <td><a href="{{ url_for('dashboard', target=s.id) }}">{{ s.display_name }}</a></td>
+          <td>{{ s.host }}</td>
+          <td>{{ s.ssh_user }}</td>
+          <td>{{ s.ssh_port }}</td>
+          <td>{{ s.auth_method }}{% if s.ssh_key_path %} ({{ s.ssh_key_path }}){% endif %}</td>
+          <td>
+            <form method="post" action="{{ url_for('servers_delete', server_id=s.id) }}"
+                  onsubmit="return confirm('Remove this server from local config? Remote host is not deleted.');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty-state">No servers yet. Add a Linux host, or use localhost on the dashboard.</p>
+  {% endif %}
+</section>
+{% endblock %}
