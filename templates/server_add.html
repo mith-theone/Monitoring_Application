@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Add server{% endblock %}
+
+{% block content %}
+<section class="form-panel" aria-label="Add server">
+  <h2>Add server</h2>
+  <p class="section-hint">
+    Prefer an SSH private key path on this machine (e.g. <code>/home/jumpuser/.ssh/id_ed25519</code>).
+    Password auth is a demo fallback with residual storage risk. Max {{ max_servers }} servers.
+  </p>
+
+  <form method="post" action="{{ url_for('servers_add') }}" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+      <label class="form-label" for="display_name">Display name</label>
+      <input class="form-control" id="display_name" name="display_name" required maxlength="64">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="host">Hostname / IP</label>
+      <input class="form-control" id="host" name="host" required maxlength="253"
+             placeholder="10.0.0.5 or host.example.com">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="ssh_user">SSH user</label>
+      <input class="form-control" id="ssh_user" name="ssh_user" required maxlength="64"
+             placeholder="ubuntu">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="ssh_port">SSH port</label>
+      <input class="form-control" id="ssh_port" name="ssh_port" type="number" min="1" max="65535" value="22">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="ssh_key_path">SSH private key path (preferred)</label>
+      <input class="form-control" id="ssh_key_path" name="ssh_key_path" maxlength="512"
+             placeholder="/home/you/.ssh/id_ed25519">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="ssh_password">SSH password (optional fallback)</label>
+      <input class="form-control" id="ssh_password" name="ssh_password" type="password" autocomplete="new-password">
+    </div>
+    <button class="btn btn-primary" type="submit">Add server</button>
+    <a class="btn btn-link" href="{{ url_for('servers_list') }}">Cancel</a>
+  </form>
+</section>
+{% endblock %}

@@ -5,17 +5,17 @@ from __future__ import annotations
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_wtf import CSRFProtect
 
+from app import db as db_module
 from app.auth import (
     LOGIN_ERROR_MESSAGE,
     authenticate,
     hash_password,
     is_authenticated,
-    login_required,
     login_user,
     logout_user,
 )
-from app import db as db_module
 from app.config import load_config
+from app.routes import register_routes
 
 csrf = CSRFProtect()
 
@@ -73,10 +73,5 @@ def create_app(test_config: dict | None = None) -> Flask:
         logout_user()
         return redirect(url_for("login"))
 
-    @app.route("/")
-    @login_required
-    def dashboard():
-        """Home dashboard shell with placeholder metric panels."""
-        return render_template("dashboard.html")
-
+    register_routes(app)
     return app
