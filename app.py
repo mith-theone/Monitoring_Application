@@ -33,7 +33,7 @@ if __name__ == "__main__":
             raise SystemExit("No free port found. Set PORT=....")
 
     user = app.config.get("ADMIN_USERNAME", DEFAULT_ADMIN_USERNAME)
-    print(f"This is jumpuser3 Demo Monitoring")
+    print("This is jumpuser3 Demo Monitoring")
     print(f"Demo login: {user} / {DEFAULT_ADMIN_PASSWORD}")
     print(f"Open http://127.0.0.1:{port}/login")
     if port == 5000:
